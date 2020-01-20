@@ -1,0 +1,17 @@
+{
+  "name": "TestJasmine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "conf.js",
+  "dependencies": {
+    "log4js": "^6.1.0",
+    "protractor": "^5.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node start.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
