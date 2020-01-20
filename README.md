@@ -10,6 +10,6 @@ All log files are stored in logs folder, which will be created automatically at 
 Package.json specify project's info, like included packages, vesion, git path and name. </br>
 Protractor configuration is stored in conf.js file. </br>
 ## To launch:
-First, run 'npm i' in project's folder to install all necessary node packages,then update webdriver-manager, finally run 'npm test'.
+First, run 'npm i' in project's folder to install all necessary node packages, then update webdriver-manager, finally run 'npm test'.
 Upon running 'npm test' command, start.js file is executed, which automatically starts protractor's webdriver-manager, but running webdriver-manager separatly won't cause any problems.
 
