@@ -9,7 +9,6 @@
     "jasmine-allure-reporter": "^1.0.2",
     "log4js": "^6.1.0",
     "protractor": "^5.4.2",
-    "rimraf": "^3.0.0",
     "yargs": "^15.1.0"
   },
   "devDependencies": {},
