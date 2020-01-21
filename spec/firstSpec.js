@@ -7,9 +7,6 @@ const {startPage} = require('../pages/startPage'),
 const logger = log4js.getLogger('default');
 
 describe('1k.by shop', () => {
-  beforeAll(() => {
-    browser.waitForAngularEnabled(false);
-  });
 
     it(`\'s catalog page\'s title should contain ${data.catalog_householdEquipment} (1)`,async () => {
       await startPage.open();

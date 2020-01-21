@@ -4,12 +4,9 @@ const {startPage} = require('../pages/startPage'),
   {data} = require('./specData'),
   log4js = require('../loggerConfig/loggerConfigurator');
 
-const logger = log4js.getLogger('default');
+const loggclser = log4js.getLogger('default');
 
 describe('1k.by shop',() => {
-  beforeAll(() => {
-    browser.waitForAngularEnabled(false);
-  });
   
     it(`'s catalog page's title should contain ${data.catalog_sportAndTourism} (1)`,async () => {
       await startPage.open();

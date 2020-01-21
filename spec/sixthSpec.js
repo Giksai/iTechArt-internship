@@ -7,10 +7,7 @@ const {startPage} = require('../pages/startPage'),
 const logger = log4js.getLogger('default');
 
 describe('1k.by shop',() => {
-    beforeAll(() => {
-        browser.waitForAngularEnabled(false);
-      });
-      
+
     it(`'s main page's authentication menu should drop (1)`,
       async () => {
         await startPage.open();

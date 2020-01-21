@@ -6,10 +6,7 @@ const {startPage} = require('../pages/startPage'),
 const logger = log4js.getLogger('default');
 
 describe('1k.by shop',() => {
-  beforeAll(() => {
-    browser.waitForAngularEnabled(false);
-  });
-  
+
     it(`'s region selection page's title should be equal to ${data.regionSelectionTitle} (1)`,
         async () => {
       await startPage.open();

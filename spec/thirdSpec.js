@@ -7,10 +7,7 @@ const {startPage} = require('../pages/startPage'),
 const logger = log4js.getLogger('default');
 
 describe('1k.by shop',() => {
-  beforeAll(() => {
-    browser.waitForAngularEnabled(false);
-  });
-  
+
     it(`'s search page results amount, which contain word ${data.searchText}, should be greater or equal to ${data.compareSearchAmount} (1-2)`,async () => {
       await startPage.open();
       await startPage.selectSearchingParameter(startPage.searchingParameters.news);
