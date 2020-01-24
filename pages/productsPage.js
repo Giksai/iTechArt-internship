@@ -4,9 +4,6 @@ const log4js = require('../loggerConfig/loggerConfigurator'),
 const logger = log4js.getLogger('default');
 
 const selectors = {
-    vendors: (vendor) => {
-        return `//div[@class="f-vendors__it"]/label/img[@alt="${vendor}"]/..`;
-    },
     submitBtn: '//button[@type="submit"]',
     productNames: '//div[@class="l-columns__main"]//a[@class="prod__link"]',
     productsPrices: '//a[@class="money__val"]',
@@ -14,19 +11,14 @@ const selectors = {
     compareButton: `//button[@class="compare-btn__main"]`,
     compareNames: `//span[@class="spec-compare__link"]`,
     comparePrices: `//a[@class="spec-compare__price"]`,
-    searchParameter: (parameter) => {
-        return `//div[@id="paramslider"]/button[@data-sliderparameterid="${parameter}"]`;
-    },
-    sortType: (sortingType) => {
-        return `//select[@name="order"]/option[text()="${sortingType}"]`;
-    },
-
+    vendors: (vendor) => `//div[@class="f-vendors__it"]/label/img[@alt="${vendor}"]/..`,
+    searchParameter: (parameter) => `//div[@id="paramslider"]/button[@data-sliderparameterid="${parameter}"]`,
+    sortType: (sortingType) => `//select[@name="order"]/option[text()="${sortingType}"]`,
 };
-
 //value of data-sliderparameterid attribute
 const searchParameters = {
     vendors: 'producers',
-    price: 'price'
+    price: 'price',
 };
 
 class ProductsPage extends BasePage {
@@ -61,6 +53,7 @@ class ProductsPage extends BasePage {
         logger.debug(`getProductPrices: all prices: ${allPrices}.`);
         return allPrices;
     }
+    
     async getComparePrices() {
         logger.debug(`getComparePrices: trying to get prices of comparable products.`);
         let comparePrices = await super.getTextOfElements(selectors.comparePrices, this.convertComparePrices);
@@ -95,9 +88,11 @@ class ProductsPage extends BasePage {
         return output;
 
     }
+
     convertProductsCompareText(text) {
         return parseInt(text[0]);
     }
+
     convertComparePrices(price) {
         logger.debug(`convertPrice: converting compare price from ${price}.`);
         let output = parseFloat(price

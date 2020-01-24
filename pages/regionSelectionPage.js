@@ -4,31 +4,21 @@ const log4js = require('../loggerConfig/loggerConfigurator'),
 const logger = log4js.getLogger('default');
 
 const selectors = {
-    deliveryTypeBox: (type) => {
-        return `//tr/td/label[text()="${type}"]`;
-    },
-    deliveryTypeCheckBox: (type) => {
-        return `//tr/td/label[text()="${type}"]/../../td/input`;
-    },
-    adressInfo: (type, value) => {
-        return `//select[@id="${type}"]/option[text()="${value}"]`;
-    },
+    deliveryTypeBox: (type) => `//tr/td/label[text()="${type}"]`,
+    deliveryTypeCheckBox: (type) => `//tr/td/label[text()="${type}"]/../../td/input`,
+    adressInfo: (type, value) => `//select[@id="${type}"]/option[text()="${value}"]`,
 };
-
 const deliveryTypes = {
     courier: 'Курьером',
     mail: 'Почтой',
     pickup: 'Самовывоз',
 };
-
 const regions = {
     minsk: 'Минская обл.',
 };
-
 const cities = {
     logoisk: 'Логойск',
 };
-
 const adressType = {
     region: 'regionid',
     city: 'cityid',
@@ -61,7 +51,6 @@ class RegionSelectionPage extends BasePage {
         logger.debug(`isDeliveryTypeChecked: is delivery type checked: ${isChecked}.`);
         return isChecked;
     }
-
 };
 
 module.exports = {

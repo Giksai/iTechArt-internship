@@ -4,9 +4,7 @@ const log4js = require('../loggerConfig/loggerConfigurator'),
 const logger = log4js.getLogger('default');
 
 const selectors = {
-    productTypeBlock: (type) => {
-        return `//ul[@class="category__items"]/li/a[span="${type}"]`;
-    }
+    productTypeBlock: (type) => `//ul[@class="category__items"]/li/a[span="${type}"]`,
 };
 
 class CatalogPage extends BasePage {

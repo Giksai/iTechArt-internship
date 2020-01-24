@@ -1,22 +1,23 @@
 const {startPage} = require('../pages/startPage'),
   {catalogPage} = require('../pages/catalogPage'),
-  {productsPage} = require('../pages/productsPage'),
-  {data} = require('./specData'),
-  log4js = require('../loggerConfig/loggerConfigurator');
+  {productsPage} = require('../pages/productsPage');
 
-const loggclser = log4js.getLogger('default');
+let compareAmount = 2,
+    productType_Bicycle = 'Велосипеды',
+    catalog_sportAndTourism = 'Спорт и туризм',
+    sortType_Price_Descending = 'цене начать с дорогих';
 
-describe('1k.by shop',() => {
+describe(`1k.by shop's products sorting and comparing check.`,() => {
   
-    it(`'s catalog page's title should contain ${data.catalog_sportAndTourism} (1)`,async () => {
+    it(` Catalog page's title should contain ${catalog_sportAndTourism} (1)`,async () => {
       await startPage.open();
-      await startPage.navigateToProductType(data.catalog_sportAndTourism);
-      expect(browser.getTitle()).toContain(data.catalog_sportAndTourism);
+      await startPage.navigateToProductType(catalog_sportAndTourism);
+      expect(browser.getTitle()).toContain(catalog_sportAndTourism);
     });
 
-    it(`'s catalog's page products's prices should be sorted decreasingly (2-3)`,async () => {
-      await catalogPage.goToSection(data.productType_Bicycle);
-      await productsPage.sort(productsPage.selectors.sortType(data.sortType_Price_Descending));
+    it(` Catalog's page products's prices should be sorted decreasingly (2-3)`,async () => {
+      await catalogPage.goToSection(productType_Bicycle);
+      await productsPage.sort(productsPage.selectors.sortType(sortType_Price_Descending));
       let allPrices = (await productsPage.getProductPrices());
       let prevPrice = allPrices[0];
       for(let price of allPrices) {
@@ -25,13 +26,13 @@ describe('1k.by shop',() => {
       }
     });
 
-    it(`'s comparison block should display two products (4)`, async () => {
+    it(` Comparison block should display ${compareAmount} products (4)`, async () => {
       await productsPage.setProductToCompare(0);
       await productsPage.setProductToCompare(1);
-      expect(productsPage.getCompareProductsAmount()).toEqual(data.compareAmount);
+      expect(productsPage.getCompareProductsAmount()).toEqual(compareAmount);
     });
 
-    it(`'s compare page should display correct product names and prices (5)`, async () => {
+    it(` Compare page should display correct product names and prices (5)`, async () => {
         let productPrices = await productsPage.getProductPrices();
         let productNames = await productsPage.getTextOfElements(productsPage.selectors.productNames);
         await productsPage.goToComparePage();
@@ -41,6 +42,5 @@ describe('1k.by shop',() => {
         expect(compareNames[0]).toContain(productNames[1]);
         expect(comparePrices[1]).toEqual(productPrices[0]);
         expect(comparePrices[0]).toEqual(productPrices[1]);
-
-    })
+    });
   });

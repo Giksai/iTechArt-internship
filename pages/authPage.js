@@ -5,15 +5,12 @@ const logger = log4js.getLogger('default');
 
 const selectors = {
     restorePassword: '//a[text()="Восстановить пароль"]',
-    formInputField: (type) => {
-        return `//input[@class="text form_inp" and @name="${type}"]`;
-    },
+    formInputField: (type) => `//input[@class="text form_inp" and @name="${type}"]`,
 };
-
 const formTypes = {
     email: 'email',
     password: 'password',
-    captcha: 'confirmationcode'
+    captcha: 'confirmationcode',
 };
 
 class AuthPage extends BasePage {
@@ -28,7 +25,6 @@ class AuthPage extends BasePage {
         logger.debug(`clickRestorePassord: trying to click on restore password button.`);
         await super.clickOnElement(selectors.restorePassword);
     }
-
 };
 
 module.exports = {

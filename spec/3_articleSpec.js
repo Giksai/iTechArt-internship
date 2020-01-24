@@ -1,45 +1,48 @@
 const {startPage} = require('../pages/startPage'),
   {searchPage} = require('../pages/searchPage'),
   {articlePage} = require('../pages/articlePage'),
-  {data} = require('./specData'),
   log4js = require('../loggerConfig/loggerConfigurator');
 
 const logger = log4js.getLogger('default');
 
-describe('1k.by shop',() => {
+let searchText = 'Беларусь',
+    compareSearchAmount = 5,
+    articleWordsAmount = 50,
+    additionalArticlesAmount = 6;
 
-    it(`'s search page results amount, which contain word ${data.searchText}, should be greater or equal to ${data.compareSearchAmount} (1-2)`,async () => {
+describe(`1k.by shop's news searching check.`,() => {
+
+    it(` Search page results amount, which contain word ${searchText}, should be greater or equal to ${compareSearchAmount} (1-2)`,async () => {
       await startPage.open();
       await startPage.selectSearchingParameter(startPage.searchingParameters.news);
-      await startPage.searchFor(data.searchText);
+      await startPage.searchFor(searchText);
       let searchResults = await searchPage.getTextOfElements(searchPage.selectors.newsTextBlock);
       let comparisonCount = 0;
       for(let result of searchResults) {
-          if(result.includes(data.searchText)) {
+          if(result.includes(searchText)) {
               comparisonCount++;
           }
       }
-      expect(comparisonCount).not.toBeLessThan(data.compareSearchAmount);
+      expect(comparisonCount).not.toBeLessThan(compareSearchAmount);
     });
 
-    it(`'s article page displays correct header (3)`,async () => {
+    it(` Article page displays correct header (3)`,async () => {
         let compareIndex = 3;
         let resultText = (await searchPage.getTextOfElements(searchPage.selectors.newsTextBlock))[compareIndex];
         await searchPage.goToArticle(compareIndex);
         expect(articlePage.getHeaderText()).toEqual(resultText);
     });
 
-    it(`'s article page text consists of no less than 50 words (4)`,async () => {
+    it(` Article page text consists of no less than ${articleWordsAmount} words (4)`,async () => {
         let allText = await articlePage.getAllArticleText();
         let words = allText.split(' ');
         logger.trace(`Words amount: ${words.length}`)
-        expect(words.length).toBeGreaterThan(data.articleWordsAmount);
+        expect(words.length).toBeGreaterThan(articleWordsAmount);
     });
 
-    it(`'s article page additional articles amount equals to ${data.additionalArticlesAmount} (5)`,async () => {
+    it(` Article page additional articles amount equals to ${additionalArticlesAmount} (5)`,async () => {
         let articlesAmount = await articlePage.getArticlesAmount();
         logger.trace(`Articles amount: ${articlesAmount}`);
-        expect(articlesAmount).toEqual(data.additionalArticlesAmount);
+        expect(articlesAmount).toEqual(additionalArticlesAmount);
     });
-
   });

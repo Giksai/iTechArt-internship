@@ -7,14 +7,9 @@ const selectors = {
     bottomFooterLinks: '//a[@class="misc-nav__it"]',
     topFooterLinks: '//a[@class="app-nav__link"]',
     submitBtn: '//input[@id="submit"]',
-    bottomFooterLinksByText: (text) => {
-        return `//a[text()="${text}"]`;
-    },
-    switchCiteVersionBtn: (version) => {
-        return `//a[@class="${version}"]`;
-    },
+    bottomFooterLinksByText: (text) => `//a[text()="${text}"]`,
+    switchCiteVersionBtn: (version) => `//a[@class="${version}"]`,
 };
-
 const citeVersions = {
     mobile: 'app-socials__mobile',
     desktop: 'misc_it i-desk',
@@ -33,6 +28,7 @@ class BasePage {
         await this.clickOnElement(selectors.switchCiteVersionBtn(version));
         logger.debug(`switchCiteVersion: switched successfully.`);
     }
+
     async isSwitchBtnAwailable(version) {
         logger.debug(`isSwitchBtnAwailable: trying to determine whether cite version switch button is available.`);
         let isAwailable = await element(by.xpath(selectors.switchCiteVersionBtn(version))).isPresent();
@@ -46,12 +42,14 @@ class BasePage {
         logger.debug(`getTopFooterLinks: upper links: ${upperLinks}.`);
         return upperLinks;
     }
+
     async getBottomFooterLinks() {
         logger.debug(`getBottomFooterLinks: trying to get link texts of bottom footer links.`);
         let bottomLinks = await this.getLinksOfElements(selectors.bottomFooterLinks);
         logger.debug(`getBottomFooterLinks: upper links: ${bottomLinks}.`);
         return bottomLinks;
     }
+
     async clickOnBottomFooterLink(linkText) {
         logger.debug(`clickOnBottomFooterLink: trying to click on footer link by its link text: ${linkText}.`);
         await this.clickOnElement(selectors.bottomFooterLinksByText(linkText));
@@ -79,6 +77,7 @@ class BasePage {
         logger.debug(`getTextOfElements: Found elements's texts: (${foundElements}).`);
         return foundElements;
     }
+
     async getLinksOfElements(selector) {
         logger.debug(`getLinksOfElements: Trying to get link texts of elements with selector: (${selector}).`);
         let foundElements = [];
@@ -119,11 +118,11 @@ class BasePage {
         logger.debug(`clickOnElement: Trying to click on element: (${selector}) with index: (${index}).`);
         await (await element.all(by.xpath(selector)))[index].click();
     }
+
     async clickOnElement(selector) {
         logger.debug(`clickOnElement: Trying to click on element: (${selector}).`);
         await element(by.xpath(selector)).click();
     }
-
 };
 
 module.exports = {

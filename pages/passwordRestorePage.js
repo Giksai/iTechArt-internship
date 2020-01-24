@@ -4,14 +4,11 @@ const log4js = require('../loggerConfig/loggerConfigurator'),
 const logger = log4js.getLogger('default');
 
 const selectors = {
-    formInputField: (type) => {
-        return `//input[@class="text form_inp" and @name="${type}"]`;
-    },
+    formInputField: (type) => `//input[@class="text form_inp" and @name="${type}"]`,
 };
-
 const formTypes = {
     email: 'email',
-    captcha: 'confirmationcode'
+    captcha: 'confirmationcode',
 };
 
 class PasswordRestorePage extends BasePage {

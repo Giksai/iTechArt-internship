@@ -1,13 +1,13 @@
 const {startPage} = require('../pages/startPage'),
   {aboutPage} = require('../pages/aboutPage'),
-  {data} = require('./specData'),
-  log4js = require('../loggerConfig/loggerConfigurator');
+  {data} = require('./specData');
 
-const logger = log4js.getLogger('default');
+let aboutLinksAmount = 10,
+    footerLinkText = 'О нас';
 
-describe('1k.by shop',() => {
+describe(`1k.by shop's site version check.`,() => {
 
-    it(`'s mobile version main page should contain desktop version switch button (1)`,
+    it(` Mobile version main page should contain desktop version switch button (1)`,
       async () => {
         await startPage.open();
         await startPage.switchCiteVersion(startPage.citeVersions.mobile);
@@ -15,14 +15,14 @@ describe('1k.by shop',() => {
             .toEqual(true);
     });
 
-    it(`'s desktop version main page should contain mobile version switch button (2)`,
+    it(` Desktop version main page should contain mobile version switch button (2)`,
       async () => {
         await startPage.switchCiteVersion(startPage.citeVersions.desktop);
         expect(startPage.isSwitchBtnAwailable(startPage.citeVersions.mobile))
             .toEqual(true);
     });
 
-    it(`'s footer section links should be correct (3)`,
+    it(` Footer section links should be correct (3)`,
       async () => {
         let bottomLinks = await startPage.getBottomFooterLinks();
         let topLinks = await startPage.getTopFooterLinks();
@@ -34,11 +34,9 @@ describe('1k.by shop',() => {
         }
     });
 
-    it(`'s about us page should contain ${data.aboutLinksAmount} links (4)`,
+    it(` About us page should contain ${aboutLinksAmount} links (4)`,
       async () => {
-        startPage.clickOnBottomFooterLink(data.footerLinkText);
-        expect(aboutPage.getAmountOfLinks()).toEqual(data.aboutLinksAmount);
+        startPage.clickOnBottomFooterLink(footerLinkText);
+        expect(aboutPage.getAmountOfLinks()).toEqual(aboutLinksAmount);
     });
-
-
   });

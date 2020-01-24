@@ -24,12 +24,12 @@ exports.config = {
   'browserName': currentBrowser,
 	},
   specs: [
-    'spec/firstSpec.js', 
-    'spec/secondSpec.js', 
-    'spec/thirdSpec.js', 
-    'spec/fourthSpec.js', 
-    'spec/fifthSpec.js', 
-    'spec/sixthSpec.js', 
+    'spec/1_vendorSpec.js', 
+    'spec/2_sorting&comparisonSpec.js', 
+    'spec/3_articleSpec.js', 
+    'spec/4_deliverySpec.js', 
+    'spec/5_siteVersionSpec.js', 
+    'spec/6_authenticationSpec.js', 
   ], 
   SELENIUM_PROMISE_MANAGER: false,
     jasmineNodeOpts: {
