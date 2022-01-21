@@ -7,7 +7,7 @@
     "allure": "0.0.0",
     "allure-commandline": "^2.13.0",
     "jasmine-allure-reporter": "^1.0.2",
-    "log4js": "^6.1.0",
+    "log4js": "^6.4.0",
     "protractor": "^5.4.2",
     "yargs": "^15.1.0"
   },
